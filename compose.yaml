@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432:5432'
+
+  api:
+    build:
+        dockerfile: ./Dockerfile
+        context: .
+    depends_on:
+      - postgres
+    ports:
+        - "3000:3000"
